@@ -12,15 +12,19 @@ export const getAllTours = (values) => {
 
     getTours(values)
       .then((res) => {
-        dispatch({ type: GET_TOURS_SUCCESS, payload: res });
+        // console.log("===9999",res)
+        dispatch({ type: GET_TOURS_SUCCESS, payload: res.data.data });
       })
       .catch((error) => {
         if (error.name === "ServerError") {
           dispatch({ type: GET_TOURS_FAILED, payload: error.message });
+          dispatch({ type: GET_TOURS_NOTSTARTED, payload: false });
         } else if (error.name === "GET_TOURSError") {
           dispatch({ type: GET_TOURS_FAILED, payload: error.message });
+          dispatch({ type: GET_TOURS_NOTSTARTED, payload: false });
         } else {
           dispatch({ type: GET_TOURS_FAILED, payload: error.message });
+          dispatch({ type: GET_TOURS_NOTSTARTED, payload: false });
         }
       });
   };

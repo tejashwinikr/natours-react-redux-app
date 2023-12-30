@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { React, useEffect, useState } from "react";
 import "./allTourStyle.css";
-import axios from "axios";
+// import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "../header/header";
 import Footer from "../footer/footer";
 import { getAllTours } from "../../duck/actions/actions";
 import { loadState } from "../../duck/reducers/commonReducer";
-import { IApplicationState } from "../../duck/reducers/commonReducer";
+import { GET_TOURS_NOTSTARTED } from "../../duck/types/types";
 
 const AllTours = () => {
   const [tours123, setTours] = useState([]);
@@ -15,27 +15,25 @@ const AllTours = () => {
   const dispatch = useDispatch();
 
   // Access specific properties from the state
-  const { tours, GET_tours123LoadState, apiError } = useSelector(
-    (state) => state
+  const { tours, GET_TOURSLoadState } = useSelector(
+    (IApplicationState) => IApplicationState.app
   );
 
+
+ useEffect(()=>{
+  dispatch(getAllTours());
+ },[dispatch])
+
   useEffect(() => {
-    dispatch(getAllTours());
-    // console.log("coming here222", tours);
-    if (GET_tours123LoadState === loadState.SUCCESS) {
-      setTours(tours.data.data.data);
+    if (GET_TOURSLoadState === loadState.SUCCESS) {
+      setTours(tours);
+      dispatch({type:GET_TOURS_NOTSTARTED})
     }
-  }, []);
+  }, [GET_TOURSLoadState, dispatch, tours]);
 
-  useEffect(()=>{
-
-    console.log("== 32",tours123)
-  },[tours123])
 
   useEffect(() => {
     async function fetchData() {
-      console.log(tours)
-      setTours(tours);
       // try {
       //   // const res = await fetch("http://localhost:3000/api/v1/tours/", {
       //   //   method: "GET",
@@ -58,16 +56,16 @@ const AllTours = () => {
     }
 
     fetchData();
-  }, [tours]);
+  },[]);
 
   return (
     <>
       <Header />
       <div className="main">
         <div className="card-container">
-          {tours123 &&
-            tours123.length > 0 &&
-            tours123.map((item, index) => (
+          {tours &&
+            tours.length > 0 &&
+            tours.map((item, index) => (
               <div className="card">
                 <div className="card__header">
                   <div className="card__picture">

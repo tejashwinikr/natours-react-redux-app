@@ -9,7 +9,7 @@ export const getTours = async (_queryParam) => {
       JSON.stringify(_queryParam)
     );
     if (response.data) {
-      return response.data.data.data;
+      return response.data;
     } else throw { name: "ApiError", message: response.response.data };
   } catch (error) {
     if (error.response.data.message && error.response.status !== 500)
