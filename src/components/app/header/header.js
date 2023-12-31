@@ -3,9 +3,13 @@
 import { React } from "react";
 import "./style.css";
 import natoursLogo from "../../assets/logo-white.png";
-import userimage from "../../assets/favicon.png";
+import { useSelector } from "react-redux";
 
-const Header = ({ user }) => {
+const Header = () => {
+  const { userData } = useSelector(
+    (IApplicationState) => IApplicationState.app
+  );
+
   return (
     <header className="header">
       <nav className="nav nav--tours">
@@ -19,7 +23,7 @@ const Header = ({ user }) => {
       </div>
 
       <nav className="nav nav--user">
-        {user ? (
+        {userData._id ? (
           <>
             <a className="nav__el" href="/">
               Logout
@@ -27,10 +31,10 @@ const Header = ({ user }) => {
             <a className="nav__el" href="/">
               <img
                 className="nav__user-img"
-                src={`/img/users/${user.photo}`}
-                alt={`Photo of ${user.name}`}
+                src={`/img/users/${userData.photo}`}
+                alt={`Photo of ${userData.name}`}
               />
-              <span>{user.name.split(" ")[0]}</span>
+              <span>{userData.name.split(" ")[0]}</span>
             </a>
           </>
         ) : (

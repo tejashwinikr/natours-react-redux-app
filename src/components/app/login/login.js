@@ -3,7 +3,7 @@ import Header from "../header/header";
 import Footer from "../footer/footer";
 
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Card, Row, Col, Spin, Tooltip } from "antd";
+import { Form, Input, Button,Card,  Row, Col, Spin, Tooltip } from "antd";
 // import { useHistory } from "react-router-dom";
 import "./style.css";
 import openNotification from "../../notifications/alert"
@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../duck/actions/actions"
 import { loadState } from "../../duck/reducers/commonReducer";
 import { LOGIN_NOTSTARTED } from "../../duck/types/types";
+import { useNavigate } from 'react-router-dom';
 
 const layout = {
   labelCol: {
@@ -23,6 +24,7 @@ const layout = {
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // const history = useHistory();
 
   const { loginLoadState, error, userData } = useSelector(
@@ -31,7 +33,8 @@ const Login = () => {
 
   useEffect(() => {
     if (loginLoadState === loadState.SUCCESS) {
-      // history.push("/dashboard");
+      navigate('/');
+      // history.push("/allTours");
     } else if (loginLoadState === loadState.FAILED) {
       let errorObj = {
         type: "error",
@@ -71,6 +74,7 @@ const Login = () => {
               </Col>
             </Row>
           )}
+          <Card>
           <div className="login-form">
             <h1>Login</h1>
             <Form
@@ -125,6 +129,7 @@ const Login = () => {
               </Form.Item>
             </Form>
           </div>
+          </Card>
         </div>
       </div>
       <Footer />
