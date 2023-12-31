@@ -1,38 +1,50 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable jsx-a11y/alt-text */
 import { React } from "react";
 import "./style.css";
 import natoursLogo from "../../assets/logo-white.png";
 import userimage from "../../assets/favicon.png";
 
-const Header = () => {
+const Header = ({ user }) => {
   return (
-    <div className="header">
-      <div className="nav nav--tours">
+    <header className="header">
+      <nav className="nav nav--tours">
         <a className="nav__el" href="/">
           All Tours
         </a>
-      </div>
+      </nav>
 
       <div className="header__logo">
-        <img src={natoursLogo} alt="natours logo"></img>
+        <img src={natoursLogo} alt="Natours logo" />
       </div>
 
-      <div className="nav nav--user">
-        {/* <a className="nav__el" href="/">
-          Logout
-        </a>
-        <a className="nav__el" href="/">
-          <img className="nav_user-img" src={userimage}></img>
-          <span> username </span>
-        </a> */}
-        <a className="nav__el" href="/">
-          Login
-        </a>
-        <a className="nav__el" href="/">
-          Singup
-        </a>
-      </div>
-    </div>
+      <nav className="nav nav--user">
+        {user ? (
+          <>
+            <a className="nav__el" href="/">
+              Logout
+            </a>
+            <a className="nav__el" href="/">
+              <img
+                className="nav__user-img"
+                src={`/img/users/${user.photo}`}
+                alt={`Photo of ${user.name}`}
+              />
+              <span>{user.name.split(" ")[0]}</span>
+            </a>
+          </>
+        ) : (
+          <>
+            <a className="nav__el" href="/login">
+              Login
+            </a>
+            <a className="nav__el" href="/signup">
+              Singup
+            </a>
+          </>
+        )}
+      </nav>
+    </header>
   );
 };
 

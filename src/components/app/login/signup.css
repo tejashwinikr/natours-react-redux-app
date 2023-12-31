@@ -1,0 +1,57 @@
+/* Signup.css */
+
+.main {
+  display: inline-table;
+  justify-content: center;
+  align-items: center;
+  height: 100px
+}
+
+.signup-form {
+  width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  align-self: auto;
+}
+
+.heading-secondary {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: grid;
+  grid-gap: 16px;
+}
+
+.form__group {
+  margin-bottom: 16px;
+}
+
+.form__label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.form__input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #218838;
+}

@@ -9,6 +9,7 @@ import { getAllTours } from "../../duck/actions/actions";
 import { loadState } from "../../duck/reducers/commonReducer";
 import { GET_TOURS_NOTSTARTED } from "../../duck/types/types";
 
+
 const AllTours = () => {
   const [tours123, setTours] = useState([]);
 
@@ -19,126 +20,143 @@ const AllTours = () => {
     (IApplicationState) => IApplicationState.app
   );
 
-
- useEffect(()=>{
-  dispatch(getAllTours());
- },[dispatch])
+  useEffect(() => {
+    dispatch(getAllTours());
+  }, [dispatch]);
 
   useEffect(() => {
     if (GET_TOURSLoadState === loadState.SUCCESS) {
       setTours(tours);
-      dispatch({type:GET_TOURS_NOTSTARTED})
+      // dispatch({ type: GET_TOURS_NOTSTARTED });
     }
   }, [GET_TOURSLoadState, dispatch, tours]);
-
-
-  useEffect(() => {
-    async function fetchData() {
-      // try {
-      //   // const res = await fetch("http://localhost:3000/api/v1/tours/", {
-      //   //   method: "GET",
-      //   // });
-
-      //   const res = await axios({
-      //     method: "GET",
-      //     url: "http://localhost:3000/api/v1/tours",
-      //   });
-
-      //   if (res.data.status === "success") {
-      //     console.log("coming here", res);
-      //     setTours(res.data.data.data);
-      //     alert("success");
-      //   }
-      // } catch (err) {
-      //   console.log("coming here111", err);
-      //   alert(err.response.data.message);
-      // }
-    }
-
-    fetchData();
-  },[]);
 
   return (
     <>
       <Header />
-      <div className="main">
-        <div className="card-container">
-          {tours &&
-            tours.length > 0 &&
-            tours.map((item, index) => (
-              <div className="card">
-                <div className="card__header">
-                  <div className="card__picture">
-                    <div className="card__picture-overlay">
+      {GET_TOURSLoadState === loadState.STARTED && (
+        <div className="loader"> Loading</div>
+      )}
+      {GET_TOURSLoadState === loadState.SUCCESS && (
+        <div className="main">
+          <div className="card-container">
+            {tours &&
+              tours.length > 0 &&
+              tours.map((item, index) => (
+                <div className="card">
+                  <div className="card__header">
+                    <div className="card__picture">
+                      <div className="card__picture-overlay">&nbsp;</div>
                       <img
                         className="card__picture-img"
-                        // src={require(`../assets/tours/${tours123.imageCover}`)}
-                      ></img>
+                        src={`img/tours/${item.imageCover}`}
+                        alt={item.name}
+                      />
+                    </div>
+                    <h3 className="heading-tertirary">
+                      <span>{item.name}</span>
+                    </h3>
+                  </div>
+
+                  <div className="card__details">
+                    <h4 className="card__sub-heading">
+                      {item.difficulty} {item.duration}-day tour
+                    </h4>
+                    <p className="card__text">{item.summary}</p>
+
+                    <div className="card__data">
+                      <svg className="card__icon">
+                        <use xlinkHref="/img/icons.svg#icon-map-pin" />
+                      </svg>
+                      <span>{item.startLocation.description}</span>
+                    </div>
+
+                    <div className="card__data">
+                      <svg className="card__icon">
+                        <use xlinkHref="/img/icons.svg#icon-calendar" />
+                      </svg>
+                      <span>
+                        {new Date(item.startDates[0]).toLocaleString("en-us", {
+                          month: "long",
+                          year: "numeric",
+                        })}
+                      </span>
+                    </div>
+
+                    <div className="card__data">
+                      <svg className="card__icon">
+                        <use xlinkHref="/img/icons.svg#icon-flag" />
+                      </svg>
+                      <span>{item.locations.length}</span>
+                    </div>
+
+                    <div className="card__data">
+                      <svg className="card__icon">
+                        <use xlinkHref="/img/icons.svg#icon-user" />
+                      </svg>
+                      <span>{item.maxGroupSize}</span>
                     </div>
                   </div>
-                  <h3 className="heading-tertirary">
-                    <span>{item.name}</span>
-                  </h3>
-                </div>
 
-                <div className="card__details">
-                  <h4 className="card__sub-heading">
-                    {item.difficulty} {item.duration}-day tour
-                  </h4>
-                  <p className="card__text">{item.summary}</p>
+                  <div className="card__footer">
+                    <p>
+                      <span className="card__footer-value">{`$ ${item.price}`}</span>
 
-                  <div className="card__data">
-                    <svg className="card__icon"></svg>
-                    <span>{item.startLocation.description}</span>
-                  </div>
+                      <span className="card__footer-text">per person</span>
+                    </p>
 
-                  <div className="card__data">
-                    <svg className="card__icon"></svg>
-                    <span>
-                      {item.startDates[0].toLocaleString("en-us", {
-                        month: "long",
-                        year: "numeric",
-                      })}
-                    </span>
-                  </div>
+                    <p className="card__ratings">
+                      <span className="card__footer-value">
+                        {item.ratingsAverage}
+                      </span>
 
-                  <div className="card__data">
-                    <svg className="card__icon"></svg>
-                    <span>{item.locations.length}</span>
-                  </div>
+                      <span className="card__footer-text">
+                        {`rating ( ${item.ratingsQuantity})`}
+                      </span>
+                    </p>
 
-                  <div className="card__data">
-                    <svg className="card__icon"></svg>
-                    <span>{item.maxGroupSize}</span>
+                    <a
+                      href={`/tour/${item.slug}`}
+                      className="btn btn--green btn--small"
+                    >
+                      Details
+                    </a>
                   </div>
                 </div>
-
-                <div className="card__footer">
-                  <p>
-                    <span className="card__footer-value">{item.price}</span>
-
-                    <span className="card__footer-text">per person</span>
-                  </p>
-
-                  <p className="card__ratings">
-                    <span className="card__footer-value">
-                      {item.ratingsAverage}
-                    </span>
-
-                    <span className="card__footer-text">
-                      rating {item.ratingsQuantity}
-                    </span>
-                  </p>
-
-                  <a className="btn.btn--green.btn--small">See Deatils</a>
-                </div>
-              </div>
-            ))}
+              ))}
+          </div>
         </div>
-      </div>
+      )}
       <Footer />
     </>
   );
 };
 
 export default AllTours;
+
+//calling api directly
+// useEffect(() => {
+//   async function fetchData() {
+//     try {
+//       // const res = await fetch("http://localhost:3000/api/v1/tours/", {
+//       //   method: "GET",
+//       // });
+
+//       const res = await axios({
+//         method: "GET",
+//         url: "http://localhost:3000/api/v1/tours",
+//       });
+
+//       if (res.data.status === "success") {
+//         console.log("coming here", res);
+//         setTours(res.data.data.data);
+//         alert("success");
+//       }
+//     } catch (err) {
+//       console.log("coming here111", err);
+//       alert(err.response.data.message);
+//     }
+//   }
+
+//   fetchData();
+// },[]);

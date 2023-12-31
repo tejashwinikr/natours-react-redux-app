@@ -1,0 +1,33 @@
+.error{
+    background-color: red;
+}
+.error-batch{
+    background-color: red;
+}
+.error-batch-long{
+    background-color: red;
+}
+
+.success{
+    background-color: green;
+}
+.error-message{
+    color:white;
+    font-weight:bold;
+}
+.success-message{
+    color:white;
+    font-weight:bold;
+}
+.success-description{
+    color:white;
+}
+.error-description{
+    color:white;
+}
+.ant-notification-notice-close{
+    display:block;
+    color:white;
+      
+}
+
