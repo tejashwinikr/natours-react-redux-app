@@ -7,6 +7,10 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILED,
   SIGNUP_NOTSTARTED,
+  LOGIN_STARTED,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
+  LOGIN_NOTSTARTED,
 } from "../types/types";
 
 export const loadState = {
@@ -39,13 +43,13 @@ export const IAppState = {
   userData: {
     email: "",
     id: "",
-    roles: [],
   },
   tours: [],
   user: [],
   GET_TOURSLoadState: loadState.NOTSTARTED,
   apiError: false,
   signupLoadState: loadState.NOTSTARTED,
+  loginLoadState: loadState.NOTSTARTED,
   changePasswordLoadState: loadState.NOTSTARTED,
   deleteDashboardLoadState: loadState.NOTSTARTED,
 };
@@ -103,6 +107,32 @@ const commonReducer = (state = initialState, action) => {
       return {
         ...state,
         signupLoadState: loadState.NOTSTARTED,
+      };
+
+    case LOGIN_STARTED:
+      return {
+        ...state,
+        loginLoadState: loadState.STARTED,
+        apiError: false,
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        loginLoadState: loadState.SUCCESS,
+        userData: action.payload,
+        apiError: false,
+      };
+    case LOGIN_FAILED:
+      return {
+        ...state,
+        loginLoadState: loadState.FAILED,
+        apiError: true,
+        error: action.payload,
+      };
+    case LOGIN_NOTSTARTED:
+      return {
+        ...state,
+        loginLoadState: loadState.NOTSTARTED,
       };
 
     default:

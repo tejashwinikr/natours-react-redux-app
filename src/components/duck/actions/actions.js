@@ -7,15 +7,19 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILED,
   SIGNUP_NOTSTARTED,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
+  LOGIN_NOTSTARTED,
+  LOGIN_STARTED,
 } from "../types/types";
 import { getTours } from "../../apis/toursAPi";
-import { SignUpUser } from "../../apis/userAPi";
+import { SignUpUser, Login } from "../../apis/userAPi";
 
 export const SignUp = (values) => {
   return (dispatch) => {
     dispatch({ type: SIGNUP_STARTED, payload: false });
 
-    SignUpUser(values) 
+    SignUpUser(values)
       .then((res) => {
         dispatch({ type: SIGNUP_SUCCESS, payload: res.data.user });
       })
@@ -29,6 +33,29 @@ export const SignUp = (values) => {
         } else {
           dispatch({ type: SIGNUP_FAILED, payload: error.message });
           dispatch({ type: SIGNUP_NOTSTARTED, payload: false });
+        }
+      });
+  };
+};
+
+export const loginUser = (values) => {
+  return (dispatch) => {
+    dispatch({ type: LOGIN_STARTED, payload: false });
+
+    Login(values)
+      .then((res) => {
+        dispatch({ type: LOGIN_SUCCESS, payload: res.data.user });
+      })
+      .catch((error) => {
+        if (error.name === "ServerError") {
+          dispatch({ type: LOGIN_FAILED, payload: error.message });
+          dispatch({ type: LOGIN_NOTSTARTED, payload: false });
+        } else if (error.name === "GET_TOURSError") {
+          dispatch({ type: LOGIN_FAILED, payload: error.message });
+          dispatch({ type: LOGIN_NOTSTARTED, payload: false });
+        } else {
+          dispatch({ type: LOGIN_FAILED, payload: error.message });
+          dispatch({ type: LOGIN_NOTSTARTED, payload: false });
         }
       });
   };
