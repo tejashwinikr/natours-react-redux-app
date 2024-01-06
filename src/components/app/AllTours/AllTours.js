@@ -3,17 +3,20 @@ import { React, useEffect, useState } from "react";
 import "./allTourStyle.css";
 // import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import Footer from "../footer/footer";
 import { getAllTours } from "../../duck/actions/actions";
 import { loadState } from "../../duck/reducers/commonReducer";
 import { GET_TOURS_NOTSTARTED } from "../../duck/types/types";
-
+import { Button } from "antd";
+import { getATour } from "../../duck/actions/actions";
 
 const AllTours = () => {
-  const [tours123, setTours] = useState([]);
+
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Access specific properties from the state
   const { tours, GET_TOURSLoadState } = useSelector(
@@ -26,10 +29,18 @@ const AllTours = () => {
 
   useEffect(() => {
     if (GET_TOURSLoadState === loadState.SUCCESS) {
-      setTours(tours);
+      
       // dispatch({ type: GET_TOURS_NOTSTARTED });
     }
   }, [GET_TOURSLoadState, dispatch, tours]);
+
+  const viewTourDetails = async (e, tour) => {
+
+    e.preventDefault();
+    dispatch(getATour(tour._id));
+
+    navigate(`/tour/${tour.slug}`);
+  };
 
   return (
     <>
@@ -115,12 +126,24 @@ const AllTours = () => {
                       </span>
                     </p>
 
-                    <a
+                    {/* <a
                       href={`/tour/${item.slug}`}
                       className="btn btn--green btn--small"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate(`/tour/${item.slug}`);
+                      }}
                     >
                       Details
-                    </a>
+                    </a> */}
+                    <Button
+                      className="btn btn--green btn--small"
+                      onClick={(e) => {
+                        viewTourDetails(e, item);
+                      }}
+                    >
+                      Details
+                    </Button>
                   </div>
                 </div>
               ))}

@@ -1,4 +1,5 @@
 import React from 'react';
+import './tourdetailStyle.css'
 
 const ReviewCard = ({ review }) => {
   const renderStars = () => {

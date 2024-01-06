@@ -27,7 +27,7 @@ const Login = () => {
   const navigate = useNavigate();
   // const history = useHistory();
 
-  const { loginLoadState, error, userData } = useSelector(
+  const { loginLoadState, error} = useSelector(
     (IApplicationState) => IApplicationState.app
   );
 

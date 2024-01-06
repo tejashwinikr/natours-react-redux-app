@@ -11,8 +11,12 @@ import {
   LOGIN_FAILED,
   LOGIN_NOTSTARTED,
   LOGIN_STARTED,
+  GET_A_TOUR_STARTED,
+  GET_A_TOUR_SUCCESS,
+  GET_A_TOUR_FAILED,
+  GET_A_TOUR_NOTSTARTED,
 } from "../types/types";
-import { getTours } from "../../apis/toursAPi";
+import { getTours,getTourById } from "../../apis/toursAPi";
 import { SignUpUser, Login } from "../../apis/userAPi";
 
 export const SignUp = (values) => {
@@ -60,6 +64,30 @@ export const loginUser = (values) => {
       });
   };
 };
+
+export const getATour = (values) => {
+  return (dispatch) => {
+    dispatch({ type: GET_A_TOUR_STARTED, payload: false });
+
+    getTourById(values)
+      .then((res) => {
+        dispatch({ type: GET_A_TOUR_SUCCESS, payload: res.data.data });
+      })
+      .catch((error) => {
+        if (error.name === "ServerError") {
+          dispatch({ type: GET_A_TOUR_FAILED, payload: error.message });
+          dispatch({ type: GET_A_TOUR_NOTSTARTED, payload: false });
+        } else if (error.name === "GET_TOURSError") {
+          dispatch({ type: GET_A_TOUR_FAILED, payload: error.message });
+          dispatch({ type: GET_A_TOUR_NOTSTARTED, payload: false });
+        } else {
+          dispatch({ type: GET_A_TOUR_FAILED, payload: error.message });
+          dispatch({ type: GET_A_TOUR_NOTSTARTED, payload: false });
+        }
+      });
+  };
+};
+
 
 export const getAllTours = (values) => {
   return (dispatch) => {

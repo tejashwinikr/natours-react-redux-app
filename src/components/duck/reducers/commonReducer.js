@@ -11,6 +11,10 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILED,
   LOGIN_NOTSTARTED,
+  GET_A_TOUR_STARTED,
+  GET_A_TOUR_SUCCESS,
+  GET_A_TOUR_FAILED,
+  GET_A_TOUR_NOTSTARTED,
 } from "../types/types";
 
 export const loadState = {
@@ -30,11 +34,12 @@ const initialState = {
   },
   tours: [],
   user: [],
+  tour: {},
   GET_TOURSLoadState: loadState.NOTSTARTED,
   apiError: false,
   signupLoadState: loadState.NOTSTARTED,
   changePasswordLoadState: loadState.NOTSTARTED,
-  deleteDashboardLoadState: loadState.NOTSTARTED,
+  getATourLoadState: loadState.NOTSTARTED,
 };
 
 export const IAppState = {
@@ -46,12 +51,13 @@ export const IAppState = {
   },
   tours: [],
   user: [],
+  tour: {},
   GET_TOURSLoadState: loadState.NOTSTARTED,
   apiError: false,
   signupLoadState: loadState.NOTSTARTED,
   loginLoadState: loadState.NOTSTARTED,
   changePasswordLoadState: loadState.NOTSTARTED,
-  deleteDashboardLoadState: loadState.NOTSTARTED,
+  getATourLoadState: loadState.NOTSTARTED,
 };
 
 const commonReducer = (state = initialState, action) => {
@@ -133,6 +139,32 @@ const commonReducer = (state = initialState, action) => {
       return {
         ...state,
         loginLoadState: loadState.NOTSTARTED,
+      };
+
+    case GET_A_TOUR_STARTED:
+      return {
+        ...state,
+        getATourLoadState: loadState.STARTED,
+        apiError: false,
+      };
+    case GET_A_TOUR_SUCCESS:
+      return {
+        ...state,
+        getATourLoadState: loadState.SUCCESS,
+        tour: action.payload,
+        apiError: false,
+      };
+    case GET_A_TOUR_FAILED:
+      return {
+        ...state,
+        getATourLoadState: loadState.FAILED,
+        apiError: true,
+        error: action.payload,
+      };
+    case GET_A_TOUR_NOTSTARTED:
+      return {
+        ...state,
+        getATourLoadState: loadState.NOTSTARTED,
       };
 
     default:
