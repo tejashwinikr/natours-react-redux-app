@@ -67,7 +67,7 @@ const Signup = () => {
   return (
     <>
       <Header />
-      <main className="main">
+      <main className="main-singup">
         <div className="signup-form">
           <h2 className="heading-secondary ma-bt-lg">Create an account</h2>
           <form className="form form--signup" onSubmit={handleSubmit}>

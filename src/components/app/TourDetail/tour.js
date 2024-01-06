@@ -39,7 +39,7 @@ const TourDetail = () => {
         <div className="loader"> Loading</div>
       )}
       {getATourLoadState === loadState.SUCCESS && (
-        <div className="main">
+        <div className="tourdetail-container">
           <div className="section-header">
             <div className="header__hero">
               <div className="header__hero-overlay">&nbsp;</div>
@@ -79,7 +79,7 @@ const TourDetail = () => {
                 <h2 className="heading-secondary ma-bt-lg">Quick facts</h2>
                 <OverviewBox
                   label="Next date"
-                  text={tour.startDates[0].toLocaleString("en-us", {
+                  text={new Date(tour.startDates[0]).toLocaleString("en-us", {
                     month: "long",
                     year: "numeric",
                   })}
@@ -119,6 +119,14 @@ const TourDetail = () => {
                   </div>
                 ))}
               </div>
+            </div>
+            <div className="description-box">
+              <h2 className="heading-secondary ma-bt-lg">{`About ${tour.name} tour`}</h2>
+              {tour.description.split("\n").map((p, index) => (
+                <p key={index} className="description__text">
+                  {p}
+                </p>
+              ))}
             </div>
           </div>
 

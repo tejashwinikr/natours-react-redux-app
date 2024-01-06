@@ -1,12 +1,17 @@
-.main {
+.tourdetail-container{
   background-color: #f7f7f7;
-  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  overflow-x: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .section-header {
   position: relative;
   height: 38vw;
-  /* clip-path: polygon(
+  clip-path: polygon(
     0 0,
     100% 0,
     100% calc(100% - var(--section-rotate)),
@@ -17,7 +22,7 @@
     100% 0,
     100% calc(100% - var(--section-rotate)),
     0 100%
-  ); */
+  );
 }
 
 .header__hero {
@@ -173,7 +178,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  /* clip-path: polygon(
+  clip-path: polygon(
     0 var(--section-rotate),
     100% 0,
     100% calc(100% - var(--section-rotate)),
@@ -184,7 +189,7 @@
     100% 0,
     100% calc(100% - var(--section-rotate)),
     0 100%
-  ); */
+  );
   margin-top: calc(0px - var(--section-rotate));
   position: relative;
   z-index: 1000;
@@ -254,7 +259,7 @@
     to(#28b487)
   );
   background: linear-gradient(to right bottom, #7dd56f, #28b487);
-  /* clip-path: polygon(
+  clip-path: polygon(
     0 var(--section-rotate),
     100% 0,
     100% calc(100% - var(--section-rotate)),
@@ -265,7 +270,7 @@
     100% 0,
     100% calc(100% - var(--section-rotate)),
     0 100%
-  ); */
+  );
 }
 
 .reviews {
