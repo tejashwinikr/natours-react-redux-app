@@ -18,6 +18,7 @@ import {
 } from "../types/types";
 import { getTours,getTourById } from "../../apis/toursAPi";
 import { SignUpUser, Login } from "../../apis/userAPi";
+import Auth from "../../utils/Auth";
 
 export const SignUp = (values) => {
   return (dispatch) => {
@@ -48,6 +49,8 @@ export const loginUser = (values) => {
 
     Login(values)
       .then((res) => {
+        console.log("=== loginUser", res)
+        Auth.login(res);
         dispatch({ type: LOGIN_SUCCESS, payload: res.data.user });
       })
       .catch((error) => {
