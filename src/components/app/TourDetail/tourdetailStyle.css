@@ -1,4 +1,4 @@
-.tourdetail-container{
+.tourdetail-container {
   background-color: #f7f7f7;
   max-width: 100%;
   margin-left: auto;
@@ -102,17 +102,18 @@
 .section-description {
   background-color: #fcfcfc;
   margin-top: calc(0px - var(--section-rotate));
-  display: -webkit-box;
-  display: -ms-flexbox;
+  /* display: -webkit-box;
+  display: -ms-flexbox; */
   display: flex;
+  width: fit-content;
 }
 .section-description > * {
-  padding: 0 8vw;
-  padding-top: 14vw;
+  /* padding: 0 8vw;
+  padding-top: 14vw; */
   padding-bottom: calc(1vw + var(--section-rotate));
   -webkit-box-flex: 0;
   -ms-flex: 0 0 50%;
-  flex: 0 0 50%;
+  /* flex: 0 0 50%; */
 }
 
 .description-box .description {
@@ -130,9 +131,12 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  flex-direction: column;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  width: 230%;
+  padding-left: 20%;
 }
 .overview-box__group:not(:last-child) {
   margin-bottom: 7rem;

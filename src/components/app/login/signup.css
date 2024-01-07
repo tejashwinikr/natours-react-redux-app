@@ -4,12 +4,13 @@
   display: inline-table;
   justify-content: center;
   align-items: center;
-  height: 100px
+  height: 100px;
 }
 
 .signup-form {
-  width: 400px;
-  padding: 20px;
+  margin-left: 30%;
+  width: 40%;
+  padding: 23px;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

@@ -1,13 +1,13 @@
 .main {
   background-color: #f7f7f7;
-  padding: 8rem 6rem;
+  padding: 4rem 10rem;
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
   position: relative;
 }
 
-.loader{
+.loader {
   align-items: center;
   align-self: center;
 }
@@ -132,7 +132,6 @@
   -ms-flex-item-align: center;
   align-self: center;
 }
-
 
 .btn,
 .btn:link,

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/alt-text */
 import { React } from "react";
-import './style.css'
+import "./style.css";
 import footerLogo from "../../assets/logo-green.png";
 const Footer = () => {
   return (
@@ -24,7 +24,7 @@ const Footer = () => {
           <a href="#">contact</a>
         </li>
       </ul>
-      <p className="footer__copyright">&copy by teju</p>
+      <p className="footer__copyright">&copy; by teju</p>
     </div>
   );
 };

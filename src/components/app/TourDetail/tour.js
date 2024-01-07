@@ -45,8 +45,8 @@ const TourDetail = () => {
               <div className="header__hero-overlay">&nbsp;</div>
               <img
                 className="header__hero-img"
-                src={`img/${tour.imageCover}`}
-                alt={`img/${tour.name}`}
+                src={`/img/tours/${tour.imageCover}`}
+                alt={`/img/tours/${tour.name}`}
               />
             </div>
 
