@@ -28,7 +28,7 @@ const Header = () => {
             <a className="nav__el" href="/">
               Logout
             </a>
-            <a className="nav__el" href="/">
+            <a className="nav__el" href="/me">
               <img
                 className="nav__user-img"
                 src={`/img/users/${userData.photo}`}
