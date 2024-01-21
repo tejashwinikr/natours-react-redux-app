@@ -25,7 +25,6 @@ export const loadState = {
 };
 
 const initialState = {
-  showLoading: false,
   error: "",
   userData: {
     email: "",
@@ -43,7 +42,6 @@ const initialState = {
 };
 
 export const IAppState = {
-  showLoading: false,
   error: "",
   userData: {
     email: "",

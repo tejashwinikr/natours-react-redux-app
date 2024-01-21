@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { React, useEffect, useState } from "react";
+import { React, useEffect } from "react";
 import "./allTourStyle.css";
 // import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,10 +11,9 @@ import { loadState } from "../../duck/reducers/commonReducer";
 import { GET_TOURS_NOTSTARTED } from "../../duck/types/types";
 import { Button } from "antd";
 import { getATour } from "../../duck/actions/actions";
+import Loader from "../../constants/loader";
 
 const AllTours = () => {
-
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,14 +27,12 @@ const AllTours = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (GET_TOURSLoadState === loadState.SUCCESS) {
-      
-      // dispatch({ type: GET_TOURS_NOTSTARTED });
+    if (GET_TOURSLoadState === loadState.FAILED) {
+      dispatch({ type: GET_TOURS_NOTSTARTED });
     }
   }, [GET_TOURSLoadState, dispatch, tours]);
 
   const viewTourDetails = async (e, tour) => {
-
     e.preventDefault();
     dispatch(getATour(tour._id));
 
@@ -46,7 +43,9 @@ const AllTours = () => {
     <>
       <Header />
       {GET_TOURSLoadState === loadState.STARTED && (
-        <div className="loader"> Loading</div>
+        <div>
+          <Loader />
+        </div>
       )}
       {GET_TOURSLoadState === loadState.SUCCESS && (
         <div className="main">
@@ -54,7 +53,7 @@ const AllTours = () => {
             {tours &&
               tours.length > 0 &&
               tours.map((item, index) => (
-                <div className="card">
+                <div className="card" key={item.id}>
                   <div className="card__header">
                     <div className="card__picture">
                       <div className="card__picture-overlay">&nbsp;</div>

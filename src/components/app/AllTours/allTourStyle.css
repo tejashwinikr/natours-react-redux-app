@@ -7,11 +7,6 @@
   position: relative;
 }
 
-.loader {
-  align-items: center;
-  align-self: center;
-}
-
 .card-container {
   max-width: 120rem;
   margin: 0 auto;

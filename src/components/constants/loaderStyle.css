@@ -1,0 +1,16 @@
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 67vh;
+  margin-left: 23%;
+}
+
+.ant-spin {
+  font-size: 24px;
+  color: #1890ff;
+}
+
+.loader-text {
+  margin: 60px 0px -5px -65px;
+}

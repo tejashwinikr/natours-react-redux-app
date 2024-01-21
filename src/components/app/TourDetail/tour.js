@@ -7,6 +7,7 @@ import Header from "../header/header";
 import Footer from "../footer/footer";
 import { loadState } from "../../duck/reducers/commonReducer";
 import "./tourdetailStyle.css";
+import Loader from "../../constants/loader";
 
 const OverviewBox = ({ label, text, icon }) => (
   <div className="overview-box__detail">
@@ -28,6 +29,7 @@ const TourDetail = () => {
   );
 
   const { slug } = useParams();
+  // eslint-disable-next-line no-unused-vars
   const dispatch = useDispatch();
 
   console.log("===", slug, tours, tour);
@@ -36,7 +38,9 @@ const TourDetail = () => {
     <>
       <Header />
       {getATourLoadState === loadState.STARTED && (
-        <div className="loader"> Loading</div>
+         <div >
+         <Loader/>
+       </div>
       )}
       {getATourLoadState === loadState.SUCCESS && (
         <div className="tourdetail-container">
