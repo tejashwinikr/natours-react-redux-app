@@ -18,6 +18,14 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
+// const root = ReactDOM.createRoot(document.getElementById('root'))
+
+// root.render(
+//   <Provider store={store}>
+//     <App />
+//   </Provider>,
+// )
+
 
 // git repo created info 
 // git remote add origin https://github.com/tejashwinikr/natours-react-redux-app.git
